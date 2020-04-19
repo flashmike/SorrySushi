@@ -43,7 +43,14 @@ public class SushiSpawner : MonoBehaviour
             Vector3 pos = new Vector3(Rand, transform.position.y, 0);
             GameObject f = Instantiate(sushi, pos, Quaternion.identity) as GameObject;
             /*add force on sushi object; so it goes up before coming down*/
-            f.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 20f), ForceMode2D.Impulse);
+            f.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 15f), ForceMode2D.Impulse);
+
+            /*then add rotation on sushi*/
+            /*f.GetComponent<Rigidbody2D>().AddTorque(20f);*/
+
+            /*randomize rotation*/
+            f.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-20f,20f));
+
 
             yield return new WaitForSeconds(0.5f);
         }
