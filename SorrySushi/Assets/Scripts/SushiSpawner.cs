@@ -5,6 +5,7 @@ using UnityEngine;
 public class SushiSpawner : MonoBehaviour
 {
     public GameObject sushi;
+    public GameObject bomb;
     public float maxX;
 
     // Start is called before the first frame update
@@ -33,6 +34,12 @@ public class SushiSpawner : MonoBehaviour
     public void SpawnSushiGroup()
     {
         StartCoroutine("SpawnSushi");
+
+        /*spawn bomb*/
+        if (Random.Range (0, 6) > 2)
+        {
+            SpawnBomb();
+        }
     }
 
     IEnumerator SpawnSushi()
@@ -54,5 +61,14 @@ public class SushiSpawner : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    void SpawnBomb()
+    {
+        float Rand = Random.Range(-maxX, maxX);
+        Vector3 pos = new Vector3(Rand, transform.position.y, 0);
+        GameObject b = Instantiate(bomb, pos, Quaternion.identity) as GameObject;
+        b.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 15f), ForceMode2D.Impulse);
+        b.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-50f, 50f));
     }
 }
