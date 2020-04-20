@@ -7,6 +7,7 @@ public class LineCreator : MonoBehaviour
     int vertextCount = 0;
     bool mouseDown = false;
     LineRenderer line;
+    public GameObject blast;
 
     void Awake()
     {
@@ -96,6 +97,18 @@ public class LineCreator : MonoBehaviour
                 foreach (BoxCollider2D box in colliders)
                     Destroy(box);
             }
+        }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Bomb")
+        {
+            GameObject b = Instantiate(blast, col.transform.position, Quaternion.identity) as GameObject;
+            Destroy(b.gameObject, 5f);
+
+            Destroy(col.gameObject);
         }
     }
 }

@@ -36,7 +36,7 @@ public class SushiSpawner : MonoBehaviour
         StartCoroutine("SpawnSushi");
 
         /*spawn bomb*/
-        if (Random.Range (0, 6) > 2)
+        if (Random.Range (0, 6) > 3)
         {
             SpawnBomb();
         }
